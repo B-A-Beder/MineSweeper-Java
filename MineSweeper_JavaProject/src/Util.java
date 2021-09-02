@@ -6,15 +6,6 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 
-// Github
-
-// comment branch   
-
-// branch Util
-
-// new import?
-
-
 /**
  * Class of utility methods
  * 
