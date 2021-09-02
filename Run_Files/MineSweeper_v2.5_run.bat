@@ -1,0 +1,1 @@
+cmd /k java -jar MineSweeper_v2.5.jar
