@@ -1,5 +1,6 @@
 import java.io.PrintStream;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -72,14 +73,20 @@ public class Score implements Comparable<Score> {
 
 	@Override
 	public String toString() {
-		final String[][] scoreParts = { { "Moves Played", String.valueOf(this.getMoves()) },
-				{ "Total Time", this.getElapsedTimeString() }, { "Start Time", this.getStartTimestampString() },
-				{ "End Time", this.getEndTimestampString() }, { "Sessions Played", String.valueOf(this.getSessions()) },
-				{ "Rows", String.valueOf(this.getRows()) }, { "Columns", String.valueOf(this.getCols()) },
-				{ "Tiles", String.valueOf(this.getNumTiles()) }, { "# Bombs", String.valueOf(this.getBombs()) },
-				{ "% Bombs", String.format("%.3f%%", (100.0 * this.getBombs() / this.getNumTiles())) },
-				{ "# Uncovered Tiles", String.valueOf(this.getUncovered()) },
-				{ "% Uncovered Tiles", String.format("%.3f%%", (100.0 * this.getUncovered() / this.getNumTiles())) } };
+		final String[][] scoreParts = { //
+				{ "Moves Played", String.valueOf(this.getMoves()) }, //
+				{ "Total Time", this.getElapsedTimeString() }, //
+				{ "Start Time", this.getStartTimestampString() }, //
+				{ "End Time", this.getEndTimestampString() }, //
+				{ "Sessions Played", String.valueOf(this.getSessions()) }, //
+				{ "Rows", String.valueOf(this.getRows()) }, //
+				{ "Columns", String.valueOf(this.getCols()) }, //
+				{ "Tiles", String.valueOf(this.getNumTiles()) }, //
+				{ "# Bombs", String.valueOf(this.getBombs()) }, //
+				{ "% Bombs", String.format("%.3f%%", (100.0 * this.getBombs() / this.getNumTiles())) }, //
+				{ "# Uncovered Tiles", String.valueOf(this.getUncovered()) }, //
+				{ "% Uncovered Tiles", String.format("%.3f%%", (100.0 * this.getUncovered() / this.getNumTiles())) } //
+		};
 
 		for (int num = 0; num < scoreParts.length; num++) {
 			if (scoreParts[num].length != 2) {

@@ -39,10 +39,11 @@ public class SaveFile implements Comparable<SaveFile> {
 
 	public String toString() {
 		final String[][] scoreParts = {
-				{ "Last Played", this.getTimestampPairs().getLast().getEndTimestamp().toString() },
-				{ "Total Time", this.getTimestampPairs().getElapsedTimeString() },
-				{ "Sessions Played", String.valueOf(this.getTimestampPairs().getSize()) },
-				{ "Moves Played", String.valueOf(this.getMoves()) } };
+				{ "Last Played", this.getTimestampPairs().getLast().getEndTimestamp().toString() }, //
+				{ "Total Time", this.getTimestampPairs().getElapsedTimeString() }, //
+				{ "Sessions Played", String.valueOf(this.getTimestampPairs().getSize()) }, //
+				{ "Moves Played", String.valueOf(this.getMoves()) } //
+		};
 
 		for (int num = 0; num < scoreParts.length; num++) {
 			if (scoreParts[num].length != 2) {
