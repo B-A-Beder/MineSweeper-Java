@@ -117,6 +117,7 @@ public class Score implements Comparable<Score> {
 			ret += "\n";
 		}
 
+		
 		return ret;
 	}
 
