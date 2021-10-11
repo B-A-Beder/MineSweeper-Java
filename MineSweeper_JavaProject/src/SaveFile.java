@@ -62,6 +62,7 @@ public class SaveFile implements Comparable<SaveFile> {
 		for (int num = 0; num < values.length; num++) {
 			values[num] = scoreParts[num][1];
 		}
+		
 		// Util.padStringArrayRight(values);
 
 		String ret = "";
