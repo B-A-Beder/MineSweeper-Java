@@ -86,7 +86,7 @@ public class Score implements Comparable<Score> {
 				{ "% Bombs", String.format("%.3f%%", (100.0 * this.getBombs() / this.getNumTiles())) }, //
 				{ "# Uncovered Tiles", String.valueOf(this.getUncovered()) }, //
 				{ "% Uncovered Tiles", String.format("%.3f%%", (100.0 * this.getUncovered() / this.getNumTiles())) } //
-			};
+		};
 
 		for (int num = 0; num < scoreParts.length; num++) {
 			if (scoreParts[num].length != 2) {
@@ -117,7 +117,6 @@ public class Score implements Comparable<Score> {
 			ret += "\n";
 		}
 
-		
 		return ret;
 	}
 
