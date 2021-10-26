@@ -7,6 +7,11 @@ import java.util.Scanner;
 
 public class Board {
 
+	/**
+	 * test code
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		Board b1 = new Board(30, 20, 50);
@@ -60,7 +65,7 @@ public class Board {
 	 * @param rows number of rows in this Board
 	 * @param cols number of columns in this Board
 	 */
-	public Board(int rows, int cols) {
+	public Board(final int rows, final int cols) {
 		this.board = new Tile[rows][cols];
 		// this.bombs = 0;
 
@@ -95,23 +100,30 @@ public class Board {
 	 * @param cols  number of columns in this Board
 	 * @param bombs number of Bombs in this Board
 	 */
-	public Board(int rows, int cols, int bombs) {
+	public Board(final int rows, final int cols, final int bombs) {
 		this(rows, cols);
-		int bombCount = bombs;
+		int bombTotal = bombs;
 
-		// add bombs
-		if (bombCount <= 0) {
-			bombCount = 0;
-		} else if (this.getRows() * this.getCols() <= bombCount) {
-			bombCount = this.getRows() * this.getCols();
+		// adjusts number of bombs to place
+		if (bombTotal <= 0) {
+			bombTotal = 0;
+		} else if (this.getRows() * this.getCols() <= bombTotal) {
+			bombTotal = this.getRows() * this.getCols();
 		}
 
-		while (this.getBombs() < bombCount && this.getBombs() < this.getRows() * this.getCols()) {
+		// places bombs
+		int bombsSoFar = 0;
+		while (bombsSoFar < bombTotal && bombsSoFar < this.getRows() * this.getCols()) {
+			// random Location
 			final int bombRow = (int) Math.floor(Math.random() * this.getRows());
 			final int bombCol = (int) Math.floor(Math.random() * this.getCols());
 			Location bombLoc = new BoardLocation(bombRow, bombCol);
 
-			this.addBomb(bombLoc);
+			// attempts to add new Bomb at Location
+			// increments number of bombs placed so far
+			if (this.addBomb(bombLoc)) {
+				bombsSoFar++;
+			}
 		}
 
 		assertClassInvariant();
@@ -128,7 +140,6 @@ public class Board {
 		this(rows, cols);
 
 		for (Location bombLoc : bombLocs) {
-
 			this.addBomb(bombLoc);
 		}
 	}
@@ -177,7 +188,6 @@ public class Board {
 	 * @return new Board
 	 */
 	public static Board fromCSV(Scanner scan) {
-
 		if (!scan.hasNextLine()) {
 			return null;
 		}
@@ -186,6 +196,7 @@ public class Board {
 		ArrayList<Location> uncovereds = new ArrayList<Location>();
 		ArrayList<Location> flags = new ArrayList<Location>();
 
+		// scans first line of Board save
 		int row = 0;
 
 		String line = scan.nextLine();
@@ -193,8 +204,10 @@ public class Board {
 			return null;
 		}
 		String[] rowTiles = line.split(",");
+		// sets row length of new Board
 		final int cols = rowTiles.length;
 
+		// parses each Tile
 		for (int col = 0; col < rowTiles.length; col++) {
 			Location loc = new BoardLocation(row, col);
 			try {
@@ -204,6 +217,7 @@ public class Board {
 			}
 		}
 
+		// scans rest of rows
 		while (scan.hasNextLine()) {
 			row++;
 			line = scan.nextLine();
@@ -215,6 +229,7 @@ public class Board {
 				return null;
 			}
 
+			// parses each Tile
 			for (int col = 0; col < rowTiles.length; col++) {
 				Location loc = new BoardLocation(row, col);
 				try {
@@ -225,12 +240,15 @@ public class Board {
 			}
 		}
 
+		// constructs new Board from save
 		Board board = new Board(row + 1, cols, bombs);
 
+		// uncovers Tiles
 		for (Location loc : uncovereds) {
 			board.uncoverTile(loc);
 		}
 
+		// flags Tiles
 		for (Location loc : flags) {
 			board.flag(loc);
 		}
@@ -399,10 +417,7 @@ public class Board {
 	 * @return total num of bombs in this Board
 	 */
 	public int getBombs() {
-		// return this.bombs;
-
 		int bombs = 0;
-
 		for (int row = 0; row < this.getRows(); row++) {
 			for (int col = 0; col < this.getCols(); col++) {
 
@@ -411,7 +426,6 @@ public class Board {
 				}
 			}
 		}
-
 		return bombs;
 	}
 
