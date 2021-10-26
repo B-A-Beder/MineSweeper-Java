@@ -356,18 +356,20 @@ public class MineSweeper {
 
 		MSGame game = null;
 
-		// File file = saveFolder.getSaveFile(saveNum - 1);
-
 		int saveIdx = saveNum - 1;
 
 		try {
-			// game = MSGame.fromFile(printer, file);
-
 			game = saveFolder.getSaveFile(saveIdx).getGame(printer);
-
-		} catch (Exception e) {// catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
+		}
+
+		// error message if SaveFile has errors
+		if (game == null) {
+			text.add("Save File Error: Error With #" + saveNum);
+			text.add("MINESWEEPER Will " + Command.PLAY.description);
+			Util.printlnWithSleep(printer, text, 250);
+			text.clear();
 		}
 
 		text.add("");
@@ -426,7 +428,6 @@ public class MineSweeper {
 		text.clear();
 
 		// TODO timings
-		// Util.printlnWithSleep(printer, scoreBoard.displayScores(), 500);
 		scoreBoard.displayScores(printer, 500);
 
 		text.add("");
