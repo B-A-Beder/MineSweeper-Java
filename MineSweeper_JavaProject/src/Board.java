@@ -555,7 +555,7 @@ public class Board {
 			throw new IllegalStateException("Illegal Tiles State: Less than 0");
 		}
 		if (Board.maxTiles < this.getRows() * this.getCols()) {
-			throw new IllegalStateException("Illegal Bombs State: Greater than max Tiles");
+			throw new IllegalStateException("Illegal Tiles State: Greater than max Tiles");
 		}
 
 		// bombs
